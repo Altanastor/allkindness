@@ -65,7 +65,12 @@ getResultBox <- function(data, i) {
               # ),
         
             tabPanel(shiny::icon("home"),
-                     span(data["description"], style="color:black;")),
+                     fluidPage(
+                       fluidRow(
+                         column(3, a(href=data["website"], target="_blank", img(src=data["Logo"], width = "100%"))),
+                         column(9, span(data["description"], style = "overflow-y:scroll; max-height: 150px; color: black"))
+                       )
+                     )),
         
             tabPanel(shiny::icon("info-circle"),
                      data["description"])
@@ -124,8 +129,19 @@ output$resultUI <- renderUI({
   # 
   # tagAppendChildren(fullResult, list = children)
   # 
-  for (i in seq(nrow(slicedData()))) {
-    b <- getResultBox(slicedData()[i, ], i)
+  nms <- unique(slicedData()$name)
+  # counter <- 0
+  # while(length(nms) != MAX_ON_PAGE - counter) {
+  #   MAX_ON_PAGE <<- MAX_ON_PAGE + 1
+  #   counter <<- counter + 1
+  #   nms <<- unique(slicedData()$name)
+  # }
+  # counter <- 0
+  # MAX_ON_PAGE <- 4
+  
+  for (i in seq(length(nms))) {
+    coord <- which(slicedData()$name == nms[i])
+    b <- getResultBox(slicedData()[coord, ], i)
     fullResult <- tagAppendChild(fullResult, b)
     fullResult <- tagAppendChild(fullResult, tags$br())
   }
@@ -153,7 +169,10 @@ output$resultUI <- renderUI({
 output$map <- renderLeaflet({
   leaflet(data = slicedData()) %>%
     addTiles() %>%  # Add default OpenStreetMap map tiles
-    addMarkers(lat = ~coordinates_lat, lng = ~coordinates_lng, popup = ~name) %>% 
+    addAwesomeMarkers(lat = ~coordinates_lat, 
+                      lng = ~coordinates_lng, 
+                      popup = ~name, 
+                      icon = awesomeIcons("ios-close", markerColor = "blue")) %>% 
     setView(lng = focusLocationRV$lng, lat = focusLocationRV$lat, zoom = 15) %>% 
     addAwesomeMarkers(lat = focusLocationRV$lat, 
                       lng = focusLocationRV$lng, 

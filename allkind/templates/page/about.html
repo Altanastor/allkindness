@@ -1,0 +1,78 @@
+{% extends "frame.html" %}
+{% block app %}
+{% load staticfiles %}
+
+<br/>
+
+<div class="panel panel-primary">
+<div class="panel-body">
+
+
+<h1 align="center"><strong style="color: #2e6da4">All kindness</strong> project</h1>
+<br/>
+
+<p>
+    <h3> Introduction:</h3>
+    <strong>All kindness</strong> is an aggregation platform powered by a
+    recommendation system engine that helps people to find the right projects for them and provide
+    the information about different directions for donations.
+    This project is developed in the context of the <strong>Social Impact Data Hack 2017</strong>.
+    More info: <a href="http://sidh2017.ut.ee" target="_blank">http://sidh2017.ut.ee</a>
+</p>
+
+<p>
+    <h3> Project steps:</h3>
+    <ul>
+        <li>Creating a poll to understand the people preferences</li>
+        <li>Analyze obtained data, ordering the preferences</li>
+        <li>Filter the dataset of charity projects regarding the preferences</li>
+        <li>Create web-project application</li>
+    </ul>
+</p>
+
+<p>
+    <h3>Future prospects:</h3>
+    <ul>
+        <li>
+            We are going to save the information about people's preferences and their final choices to donate.
+            It can be used later to propose projects even without not sufficient information about person.
+            Recommendation system can be upgraded after obtaining the sufficient volume of data.
+        </li>
+        <li>
+            Collected information can also be used to understand patterns in how people search for charity
+            programs and opportunities to help and use this information to give feedback to NGOs on how they can
+            better advertise their work.
+        </li>
+    </ul>
+</p>
+
+<p>
+    <h3>Team:</h3>
+    <ul>
+    <li>Yuliia Puzanova</li>
+    <li>Mikhail Papkov</li>
+    <li>Yevheniia Kryvenko</li>
+    <li>Elizaveta Korotkova</li>
+    <li>Helmet Toots</li>
+    <li>Anu Ülejõe</li>
+    <li>Carlos Bentes</li>
+</ul>
+</p>
+
+
+    </div>
+</div>
+
+<br/>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109559488-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-109559488-1');
+</script>
+{% endblock %}

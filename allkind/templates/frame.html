@@ -25,7 +25,27 @@
 <title>All Kindness</title>
 </head>
 
-<body background="{% static 'img/bg_tartu.jpg' %}" style="background-size:cover;">
+<body background="{% static 'img/bg_tartu_small.png' %}" style="background-size:cover;">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+		<div class="navbar-left">
+		  <a class="navbar-brand" href="/">Kindness of all kind</a>
+		</div>
+
+		<ul class="nav navbar-nav navbar-right">
+		<li class="dropdown">
+			<a id="menu" href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="glyphicon glyphicon-menu-hamburger"></span>&nbsp;Menu <b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="/"><span class="glyphicon glyphicon-home icon-menu"></span> Home</a></li>
+				<li><a href="/app"><span class="glyphicon glyphicon-th icon-menu"></span> Application</a></li>
+				<li><a href="/about"><span class="glyphicon glyphicon-info-sign icon-menu"></span> About </a></li>
+			</ul>
+		</li>
+		</ul>
+	</div>
+</nav>
 
 <!-- Main Page Container -->
 <div class="container">

@@ -47,6 +47,14 @@ titleIcons <- function(categories){
   categories
 }
 
+fixLink <- function(link) {
+  if (substr(link, 1, 4) != "http") {
+    paste0("http://", link)
+  } else {
+    link
+  }
+}
+
 getResultBox <- function(data, i) {
   id <- paste0("resultbox", i)
   
@@ -67,13 +75,15 @@ getResultBox <- function(data, i) {
             tabPanel(shiny::icon("home"),
                      fluidPage(
                        fluidRow(
-                         column(3, a(href=data["website"], target="_blank", img(src=data["Logo"], width = "100%"))),
+                         column(3, a(href=fixLink(data["website"]), target="_blank", img(src=data["Logo"], width = "100%"))),
                          column(9, span(data["description"], style = "overflow-y:scroll; max-height: 150px; color: black"))
                        )
                      )),
         
             tabPanel(shiny::icon("info-circle"),
-                     data["facebook"])
+                     data["facebook"],
+                     tags$br(),
+                     data["Inforegister"])
         
             # tags$style(make_css(list('.box',
             #                          c('font-size', 'font-family', 'color'),

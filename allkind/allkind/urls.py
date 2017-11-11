@@ -21,6 +21,5 @@ from page import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^about/', views.about),
-    url(r'^app/', views.app),
     url(r'^admin/', admin.site.urls),
 ]

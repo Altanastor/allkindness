@@ -129,11 +129,6 @@ questionUI <- function(question, mandatory, ns) {
   )
 }
 
-navigationUI <- basicPage(
-  br(),
-  actionButton("prevBtn", "< Previous"),
-  actionButton("nextBtn", "Next >")
-)
 
 NUM_PAGES <- 0
 
@@ -289,6 +284,7 @@ formServerHelper <- function(input, output, session, formInfo, submitAction) {
     print("multiple pages mode")
   }
   
+  # Hide prev button by default
   rv <- reactiveValues(page = 1)
   
   observe({
@@ -306,10 +302,18 @@ formServerHelper <- function(input, output, session, formInfo, submitAction) {
   observeEvent(input$prevBtn, {
     print("prev")
     navPage(-1)
+    if (rv$page == 1) {
+      shinyjs::hide("prevBtn")
+    }
+    shinyjs::show("nextBtn")
   })
   observeEvent(input$nextBtn, {
     print("next")
     navPage(1)
+    if (rv$page == NUM_PAGES) {
+      shinyjs::hide("nextBtn")
+    }
+    shinyjs::show("prevBtn")
   })
   
 

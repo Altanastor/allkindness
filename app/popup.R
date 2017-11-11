@@ -42,7 +42,7 @@ modal_questionnaire <- function(failed = FALSE) {
     # footer = modalButton("Skip"),
     footer = NULL,
     size = "s",
-    easyClose = T
+    easyClose = F
   )
 }
 

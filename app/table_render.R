@@ -73,7 +73,7 @@ getResultBox <- function(data, i) {
                      )),
         
             tabPanel(shiny::icon("info-circle"),
-                     data["description"])
+                     data["facebook"])
         
             # tags$style(make_css(list('.box',
             #                          c('font-size', 'font-family', 'color'),

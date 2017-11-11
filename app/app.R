@@ -48,14 +48,14 @@ ui <- div(
     # theme = "bootstrap.min.css",
     dashboardHeader(
       titleWidth = 550,
-      title = span("All kindness", style="font-weight: bold; font-size: 36px;")
+      title = "All kindness"
     ),
     dashboardSidebar(
       width = 550,
       uiOutput("resultUI")
     ),
     dashboardBody(
-      leafletOutput("map", height = "900px")
+      leafletOutput("map", height = "87vh")
     )
     
    # theme = "bootstrap.min.css",

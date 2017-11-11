@@ -49,25 +49,56 @@ titleIcons <- function(categories){
 
 getResultBox <- function(data, i) {
   id <- paste0("resultbox", i)
-  b <- shinydashboard::tabBox(
-    side = "left",
-    width = "100%",
-    title = actionButton(id, tags$h3(data["name"]), style='padding:4px 4px 4px 4px; margin: 4px 4px; font-size:80%'),
-      # fluidRow(
-      # column(11, tags$h3(data["name"]), style="padding:0px;"),
-      # column(1, actionButton(id, "", icon("map-marker")), style="padding:10px;")
-      # ),
-
-    tabPanel(shiny::icon("home"),
-             span(data["description"], style="color:black")),
-    
-    tabPanel(shiny::icon("info-circle"),
-             data["description"])
-    
-    # tags$style(make_css(list('.box', 
-    #                          c('font-size', 'font-family', 'color'), 
-    #                          c('14px', 'arial', 'black'))))
+  
+  b <- div(
+            # Make the whole box clickable
+            HTML(sprintf('<div id="%s" class="action-button shiny-bound-input" >', id)),
+            
+            shinydashboard::tabBox(
+            side = "left",
+            width = "100%",
+            # title = actionButton(id, tags$h3(data["name"]), style='padding:0px 0px 0px 0px !important; margin: 4px 4px; font-size:80%'),
+            title = tags$h3(data["name"]),
+              # fluidRow(
+              # column(11, tags$h3(data["name"]), style="padding:0px;"),
+              # column(1, actionButton(id, "", icon("map-marker")), style="padding:10px;")
+              # ),
+        
+            tabPanel(shiny::icon("home"),
+                     span(data["description"], style="color:black;")),
+        
+            tabPanel(shiny::icon("info-circle"),
+                     data["description"])
+        
+            # tags$style(make_css(list('.box',
+            #                          c('font-size', 'font-family', 'color'),
+            #                          c('14px', 'arial', 'black'))))
+          ), 
+          
+          HTML("</div>")
   )
+
+  
+  # b <- actionButton(id, style='padding:0px 0px 0px 0px !important; word-break:break-word;text-overflow:clip; margin: 0px 0px; width: 500px;',
+  #   shinydashboard::tabBox(
+  #   side = "left",
+  #   width = "100%",
+  #   title = tags$h3(data["name"]),
+  #   # fluidRow(
+  #   # column(11, tags$h3(data["name"]), style="padding:0px;"),
+  #   # column(1, actionButton(id, "", icon("map-marker")), style="padding:10px;")
+  #   # ),
+  #   tabPanel(shiny::icon("home"),
+  #            div(data["description"], style="color:black; word-break:break-word;text-overflow:clip;")),
+  #   
+  #   tabPanel(shiny::icon("info-circle"),
+  #            div(data["description"], style="color:black; word-break:break-word;text-overflow:clip;"))
+  #   
+  #   # tags$style(make_css(list('.box', 
+  #   #                          c('font-size', 'font-family', 'color'), 
+  #   #                          c('14px', 'arial', 'black'))))
+  # ))
+  
   
   observeEvent(input[[id]], {
     print(id)
@@ -123,6 +154,7 @@ output$map <- renderLeaflet({
   leaflet(data = slicedData()) %>%
     addTiles() %>%  # Add default OpenStreetMap map tiles
     addMarkers(lat = ~coordinates_lat, lng = ~coordinates_lng, popup = ~name) %>% 
+    setView(lng = focusLocationRV$lng, lat = focusLocationRV$lat, zoom = 15) %>% 
     addAwesomeMarkers(lat = focusLocationRV$lat, 
                       lng = focusLocationRV$lng, 
                       popup = focusLocationRV$name,

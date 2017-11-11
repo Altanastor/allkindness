@@ -1,0 +1,8 @@
+install.packages("shiny")
+install.packages("devtools")
+devtools::install_github("daattali/shinyforms")
+devtools::install_github("lrodriguezlujan/multiStepPage")
+install.packages("leaflet")
+install.packages("leaflet.extras")
+install.packages("shinyjs")
+install.packages("shinydashboard")

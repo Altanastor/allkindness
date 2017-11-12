@@ -81,9 +81,9 @@ getResultBox <- function(data, i) {
         
             tabPanel(shiny::icon("info-circle"),
                      fluidPage(
-                       span(data["facebook"], style = "color: blue;"),
+                       a(href = data["facebook"], "Facebook page", target="_blank", style="color: blue;"),
                        tags$br(),
-                       span(data["Inforegister"], style = "color: blue;")
+                       a(href = data["Inforegister"], "Inforegister", target="_blank", style="color: blue;")
                        )
                     )
         
@@ -137,19 +137,23 @@ output$resultUI <- renderUI({
   }
   
   fluidPage(
-    fluidRow(tags$br()),
     fluidRow(
-      style = "overflow-y:scroll; max-height: 87vh",
-      column(width = 12,
-             fullResult
+      column(12, style = "max-height: 90vh",
+        fluidRow(tags$br()),
+        fluidRow(
+          style = "overflow-y:scroll; max-height: 87vh",
+          column(width = 12,
+                 fullResult
+          )
+        ),
+        fluidRow(tags$br()),
+        fluidRow(
+          column(width = 6,
+                 actionButton("prevResults_btn", " < Previous", width = "80%")),
+          column(width = 6,
+                 actionButton("nextResults_btn", "Next > ", width = "80%"))
+        )
       )
-    ),
-    fluidRow(tags$br()),
-    fluidRow(
-      column(width = 6,
-             actionButton("prevResults_btn", " < Previous", width = "80%")),
-      column(width = 6,
-             actionButton("nextResults_btn", "Next > ", width = "80%"))
     )
   )
   
@@ -163,7 +167,7 @@ output$map <- renderLeaflet({
                       lng = ~coordinates_lng, 
                       popup = ~name, 
                       icon = awesomeIcons("ios-close", markerColor = "blue")) %>% 
-    setView(lng = focusLocationRV$lng, lat = focusLocationRV$lat, zoom = 15) %>% 
+    setView(lng = focusLocationRV$lng, lat = focusLocationRV$lat, zoom = 14) %>% 
     addAwesomeMarkers(lat = focusLocationRV$lat, 
                       lng = focusLocationRV$lng, 
                       popup = focusLocationRV$name,

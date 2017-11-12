@@ -49,15 +49,15 @@ ui <- div(
     skin = "green",
     # theme = "bootstrap.min.css",
     dashboardHeader(
-      titleWidth = 550,
+      titleWidth = "40vw",
       title = "All kindness"
     ),
     dashboardSidebar(
-      width = 550,
+      width = "40vw",
       uiOutput("resultUI")
     ),
     dashboardBody(
-      leafletOutput("map", height = "87vh")
+      leafletOutput("map", height = "90vh")
     )
     
    # theme = "bootstrap.min.css",
@@ -97,8 +97,20 @@ server <- function(input, output) {
   submit_action <- function(ranking_data) {
     print("submit action")
     ranking_data <- data.frame(ranking_data, stringsAsFactors = F)
-    ranking_data$lat <- lat_r()
-    ranking_data$lng <- lng_r()
+    if (ranking_data$city == "0;0") {
+      ranking_data$lat <- lat_r()
+      ranking_data$lng <- lng_r()  
+    } else {
+      coord <- unlist(strsplit(ranking_data$city[1], split = ";"))
+      print(coord)
+      lat <- as.numeric(coord[1])
+      lng <- as.numeric(coord[2])
+      
+      ranking_data$lat <- lat
+      ranking_data$lng <- lng  
+    }
+    # ranking_data$lat <- lat_r()
+    # ranking_data$lng <- lng_r()
     
     print(ranking_data)
     

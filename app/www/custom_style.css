@@ -1,3 +1,11 @@
 .modal-dialog {width: 50%; height: 85%;} #delete_trial{background-color:lightCoral}
 .tab-content {cursor: pointer;}
 .nav-tabs {cursor: pointer;}
+a.hover {
+    color: red;
+    text-decoration: none;
+}
+
+a.hover:hover {
+    text-decoration: underline;
+}

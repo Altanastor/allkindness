@@ -8,7 +8,7 @@ questions <- list(
 
   list(id = "what",
        type = "checkboxGroup",
-       title = "How do you feel what you want and could help?",
+       title = "How do you feel that you want and could help?",
        choises = c("give money" = 1, 
                    "volunteer" = 2,
                    "donate blood" = 3,

@@ -167,7 +167,9 @@ output$map <- renderLeaflet({
                       lng = ~coordinates_lng, 
                       popup = ~name, 
                       icon = awesomeIcons("ios-close", markerColor = "blue")) %>% 
-    setView(lng = focusLocationRV$lng, lat = focusLocationRV$lat, zoom = 14) %>% 
+    setView(lng = focusLocationRV$lng, 
+            lat = focusLocationRV$lat, 
+            zoom = 14) %>% 
     addAwesomeMarkers(lat = focusLocationRV$lat, 
                       lng = focusLocationRV$lng, 
                       popup = focusLocationRV$name,

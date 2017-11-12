@@ -10,9 +10,11 @@
 library(shiny)
 library(shinyjs)
 library(leaflet)
-library(multiStepPage)
 library(shinydashboard)
 library(readr)
+
+# Requirements (uncomment this for the first launch)
+# eval(parse("requirements.R", encoding="UTF-8"))
 
 # Shiny forms
 eval(parse("shinyform.R", encoding="UTF-8"))
@@ -90,20 +92,6 @@ server <- function(input, output) {
   eval(parse("popup.R", encoding="UTF-8"))
   eval(parse("order.R", encoding="UTF-8"))
   eval(parse("table_render.R", encoding="UTF-8"))
-  
-  
-  # output$lat <- renderPrint({
-  #   input$lat
-  # })
-  # 
-  # output$long <- renderPrint({
-  #   input$lng
-  # })
-  
-  # if(!is.null(input$lat)) {
-  #   locationRV$lat = input$lat
-  #   locationRV$lng = input$lng
-  # }
 
 
   submit_action <- function(ranking_data) {

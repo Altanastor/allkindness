@@ -16,13 +16,14 @@ focusLocationRV <- reactiveValues(
 )
 
 lat_r <- reactive(
-  if(!is.null(input$lat)) {
+  if(is.null(input$lat)) {
     58.378296
   } else {
     as.numeric(input$lat)
   })
+
 lng_r <- reactive(
-  if(!is.null(input$lng)) {
+  if(is.null(input$lng)) {
     26.714533
   } else {
     as.numeric(input$lng)
@@ -62,15 +63,12 @@ getResultBox <- function(data, i) {
             # Make the whole box clickable
             HTML(sprintf('<div id="%s" class="action-button shiny-bound-input" >', id)),
             
+            # Box itself
             shinydashboard::tabBox(
             side = "left",
             width = "100%",
-            # title = actionButton(id, tags$h3(data["name"]), style='padding:0px 0px 0px 0px !important; margin: 4px 4px; font-size:80%'),
             title = tags$h3(data["name"]),
-              # fluidRow(
-              # column(11, tags$h3(data["name"]), style="padding:0px;"),
-              # column(1, actionButton(id, "", icon("map-marker")), style="padding:10px;")
-              # ),
+
         
             tabPanel(shiny::icon("home"),
                      fluidPage(
@@ -78,43 +76,25 @@ getResultBox <- function(data, i) {
                          column(3, a(href=fixLink(data["website"]), target="_blank", img(src=data["Logo"], width = "100%"))),
                          column(9, span(data["description"], style = "overflow-y:scroll; max-height: 150px; color: black"))
                        )
-                     )),
+                     )
+                   ),
         
             tabPanel(shiny::icon("info-circle"),
-                     data["facebook"],
-                     tags$br(),
-                     data["Inforegister"])
+                     fluidPage(
+                       span(data["facebook"], style = "color: blue;"),
+                       tags$br(),
+                       span(data["Inforegister"], style = "color: blue;")
+                       )
+                    )
         
-            # tags$style(make_css(list('.box',
-            #                          c('font-size', 'font-family', 'color'),
-            #                          c('14px', 'arial', 'black'))))
+
           ), 
-          
+          # Closing div
           HTML("</div>")
   )
 
   
-  # b <- actionButton(id, style='padding:0px 0px 0px 0px !important; word-break:break-word;text-overflow:clip; margin: 0px 0px; width: 500px;',
-  #   shinydashboard::tabBox(
-  #   side = "left",
-  #   width = "100%",
-  #   title = tags$h3(data["name"]),
-  #   # fluidRow(
-  #   # column(11, tags$h3(data["name"]), style="padding:0px;"),
-  #   # column(1, actionButton(id, "", icon("map-marker")), style="padding:10px;")
-  #   # ),
-  #   tabPanel(shiny::icon("home"),
-  #            div(data["description"], style="color:black; word-break:break-word;text-overflow:clip;")),
-  #   
-  #   tabPanel(shiny::icon("info-circle"),
-  #            div(data["description"], style="color:black; word-break:break-word;text-overflow:clip;"))
-  #   
-  #   # tags$style(make_css(list('.box', 
-  #   #                          c('font-size', 'font-family', 'color'), 
-  #   #                          c('14px', 'arial', 'black'))))
-  # ))
-  
-  
+  # Observe box clicks
   observeEvent(input[[id]], {
     print(id)
     focusLocationRV$lat <- data$coordinates_lat
